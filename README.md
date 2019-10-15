@@ -505,6 +505,16 @@ For remote overrides, the following extended settings must be configured:
   * `LOOP_DEVELOPER_TEAM_ID` - Your Apple developer team ID.
   * `LOOP_PUSH_SERVER_ENVIRONMENT` - (optional) Set this to `production` if you are using a provisioning profile that specifies production aps-environment, such as when distributing builds via TestFlight.
 
+To generate a Apple Push Notification, use the following instructions:
+- Log into the [Apple Developer site](https://developer.apple.com/account/resources/authkeys/list), navigate to "Certificates, IDs, and Profiles" -> "Keys" -> and click on the `+` to generate an APNs key.
+- Make note of the "Key ID".
+- Download the key. It will be saved as a `.p8` file, which you can click on, which will open it in TextEdit on your Mac. Select all the text and copy it.
+- Log in to Heroku, edit your config vars to add a new `LOOP_APNS_KEY` var and paste in the contents of your key.
+- Add another new var named `LOOP_APNS_KEY_ID`, and set it to your Key ID from above (it's also the name of the p8 file)
+- Finally, add a third var named `LOOP_DEVELOPER_TEAM_ID`, and set it to your Apple developer team ID. 
+You can see this when you select your developer account to build loop, and your bundle identifier changes to something like `com.UY878SU32Q.loopkit.Loop`. Your team id is the `UY878SU32Q` part.
+It is also listed in the top right side of your Apple Developer site.
+  
 ##### `override` (Override Mode)
   Additional monitoring for DIY automated insulin delivery systems to display real-time overrides such as Eating Soon or Exercise Mode:
   * Requires `DEVICESTATUS_ADVANCED="true"` to be set
